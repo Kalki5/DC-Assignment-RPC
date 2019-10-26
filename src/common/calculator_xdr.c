@@ -6,7 +6,7 @@
 #include "calculator.h"
 
 bool_t
-xdr_variable (XDR *xdrs, variable *objp)
+xdr_request (XDR *xdrs, request *objp)
 {
 	register int32_t *buf;
 
@@ -56,6 +56,18 @@ xdr_variable (XDR *xdrs, variable *objp)
 	 if (!xdr_int (xdrs, &objp->ans))
 		 return FALSE;
 	 if (!xdr_int (xdrs, &objp->choice))
+		 return FALSE;
+	return TRUE;
+}
+
+bool_t
+xdr_response (XDR *xdrs, response *objp)
+{
+	register int32_t *buf;
+
+	 if (!xdr_int (xdrs, &objp->value))
+		 return FALSE;
+	 if (!xdr_int (xdrs, &objp->code))
 		 return FALSE;
 	return TRUE;
 }

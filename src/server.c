@@ -1,4 +1,5 @@
 #include "common/calculator.h"
+#include "math.h"
 
 int isprime(int a) {
     int i;
@@ -19,36 +20,49 @@ int isBothOddOrEven(int x, int y) {
     return !((x & 1) ^ (y & 1));
 }
 
-int *calc_1_svc(variable *argp, struct svc_req *rqstp) {
-    static int result;
+int isInteger(int z) {
+    return ceil(z) == floor(z);
+}
+
+response *calc_1_svc(request *argp, struct svc_req *rqstp) {
+    static response result;
+    result.code = 200;
+    if (!isInteger(argp->x) || !isInteger(argp->y)) {
+        result.code = 401;
+        return &result;
+    }
     switch(argp->choice) {
         case 1: {
-            result = (argp->x) + (argp->y);
+            result.value = (argp->x) + (argp->y);
             break;
         }
         case 2: {
-            result = (argp->x) * (argp->y);
+            result.value = (argp->x) * (argp->y);
             break;
         }
         case 3: {
-            result = (argp->x) - (argp->y);
+            result.value = (argp->x) - (argp->y);
             break;
         }
         case 4: {
-            result = (argp->x) / (argp->y);
+            result.value = (argp->x) / (argp->y);
             break;
         }
         case 5: {
-            result = (argp->x) % (argp->y);
+            result.value = (argp->x) % (argp->y);
             break;
         }
         case 6: {
-            result = isprime(argp->x);
+            result.value = isprime(argp->x);
             break;
         }
         case 7: {
-            result = isBothOddOrEven(argp->x, argp->y);
+            result.value = isBothOddOrEven(argp->x, argp->y);
             break;
+        }
+        default: {
+            result.code = 400;
+            printf("Server Error: Given choice does not exist");
         }
     }
     return &result;
