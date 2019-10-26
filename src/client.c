@@ -13,7 +13,7 @@ void calc_prg_1(char *host) {
     }
 
     printf("\nOperations:\n1. Addition\n2. Multiplication\n3. Subtraction\n4. Division\n5. Remainder \n6. Is first number prime\n7. Check if both are Odd or Even\n\nEnter choice (1-7): ");
-    if (!scanf("%d", &calc_1_arg.choice) && calc_1_arg.choice < 1 && calc_1_arg.choice > 7) {
+    if (!scanf("%d", &calc_1_arg.choice) || calc_1_arg.choice < 1 || calc_1_arg.choice > 7) {
         printf("Error: Invalid choice\n");
         exit(1);
     }

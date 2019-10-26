@@ -12,5 +12,8 @@ build:
 rpcgen:
 	cd src/common/ && rpcgen -C calculator.x
 
+rpcclean:
+	rm -rf src/common/calculator.h src/common/calculator_*.c 
+
 clean:
-	rm -rf bin src/common/calculator.h src/common/calculator_*.c 
+	rm -rf bin
