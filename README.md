@@ -15,8 +15,11 @@ apt install -y gcc make rpcgen rpcbind
 * Run `./bin/server` to start the server and `./bin/client localhost` to connect the client with the server.
 * Use client's prompt to send instructions to the server.
 
-### Status Codes
+## Status Codes
 * **200** - Successful
 * **400** - Invalid choice of Operation
 * **401** - Invalid type of parameters
 
+## Screenshots
+![Building](screenshot/Building.png)
+![Executing](screenshot/Executing.png)
